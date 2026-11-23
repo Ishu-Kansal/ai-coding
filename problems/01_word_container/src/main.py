@@ -22,6 +22,5 @@ def main():
     print(f"container words: {result}")
     print("END word container demo")
 
-
 if __name__ == "__main__":
     main()
