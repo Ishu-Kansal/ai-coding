@@ -1,4 +1,4 @@
-from yatzy1 import Yatzy
+from python.yatzy1 import Yatzy
 
 
 def test_chance_scores_sum_of_all_dice():
@@ -61,6 +61,8 @@ def test_two_Pair():
     assert 16 == Yatzy().two_pair(3, 3, 5, 4, 5)
     assert 18 == Yatzy().two_pair(3, 3, 6, 6, 6)
     assert 0 == Yatzy().two_pair(3, 3, 6, 5, 4)
+    assert 16 == Yatzy().two_pair(3, 3, 5, 5, 1)
+    assert 0 == Yatzy().two_pair(3, 3, 3, 3, 1)
 
 
 def test_three_of_a_kind():
@@ -91,3 +93,12 @@ def test_largeStraight():
 def test_fullHouse():
     assert 18 == Yatzy.fullHouse(6, 2, 2, 2, 6)
     assert 0 == Yatzy.fullHouse(2, 3, 4, 5, 6)
+    assert 13 == Yatzy.fullHouse(2, 2, 3, 3, 3)
+    assert 0 == Yatzy.fullHouse(4, 4, 4, 4, 4)
+
+
+def test_score_with_joker_uses_highest_scoring_joker_value():
+    assert 15 == Yatzy.score_with_joker([0, 2, 3, 4, 5], Yatzy.smallStraight)
+    assert 20 == Yatzy.score_with_joker([0, 2, 3, 4, 5], Yatzy.largeStraight)
+    assert 24 == Yatzy.score_with_joker([0, 0, 4, 4, 4], Yatzy.fullHouse)
+    assert 22 == Yatzy.score_with_joker([0, 0, 6, 5, 1], Yatzy.two_pair)
