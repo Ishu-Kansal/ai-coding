@@ -1,3 +1,12 @@
+"""Application entry point for the Lift Pass Pricing Flask service.
+
+Read: The prices module and its configured Flask app.
+Modify: Starts the development HTTP server on port 3005.
+Output: Prints the startup URL and serves GET/PUT requests for lift-pass prices.
+Business logic: This file contains transport startup only; pricing and database
+behavior are delegated to prices.py and db.py.
+"""
+
 from prices import app
 
 if __name__ == "__main__":
