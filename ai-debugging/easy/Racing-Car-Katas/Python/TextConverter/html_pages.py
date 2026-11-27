@@ -9,7 +9,7 @@ import html as html_converter
 class HtmlPagesConverter:
 
     def __init__(self, filename):
-        """Read the file and note the positions of the page breaks so we can access them quickly"""
+        """Read the file and record zero, page-break, and end-of-file positions for fast page access."""
         self.filename = filename
         self.breaks = [0]
         with open(self.filename, "r", encoding="UTF-8") as f:
@@ -24,7 +24,7 @@ class HtmlPagesConverter:
             self.breaks.append(f.tell())                
 
     def get_html_page(self, page):
-        """Return html page with the given number (zero indexed)"""
+        """Return the zero-indexed page as HTML, escaping text and omitting page-break markers."""
         page_start = self.breaks[page]
         page_end = self.breaks[page+1]
         html = ""

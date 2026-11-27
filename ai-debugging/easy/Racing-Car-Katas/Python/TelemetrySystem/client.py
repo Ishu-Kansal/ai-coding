@@ -8,14 +8,17 @@ class TelemetryClient(object):
     DIAGNOSTIC_MESSAGE = "AT#UD"
 
     def __init__(self):
+        """Initialize the client as offline with no pending diagnostic response."""
         self._online_status = False
         self._diagnosticMessageJustSent = False
 
     @property
     def online_status(self):
+        """Return whether the simulated client is currently online."""
         return self._online_status
 
     def connect(self, telemetry_server_connection_string):
+        """Reject an empty connection string and otherwise simulate a 20-percent successful connection."""
         if (telemetry_server_connection_string is None or telemetry_server_connection_string == ""):
             raise Exception()
 
@@ -25,9 +28,11 @@ class TelemetryClient(object):
         self._online_status = success
 
     def disconnect(self):
+        """Set the simulated client offline."""
         self._online_status = False
 
     def send(self, message):
+        """Reject an empty message and remember whether it is the diagnostic message for the next receive."""
         if (message is None or message == ""):
             raise Exception()
 
@@ -40,6 +45,7 @@ class TelemetryClient(object):
 
 
     def receive(self):
+        """Return simulated diagnostic telemetry after AT#UD, or a random sequence after another message."""
         if (self._diagnosticMessageJustSent):
             # Simulate the reception of the diagnostic message
             message = """\

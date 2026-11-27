@@ -4,10 +4,12 @@ class TelemetryDiagnostics:
     DiagnosticChannelConnectionString = "*111#"
 
     def __init__(self):
+        """Create a simulated telemetry client and an empty diagnostic response."""
         self._telemetry_client = TelemetryClient()
         self.diagnostic_info = ""
 
     def check_transmission(self):
+        """Disconnect, try the diagnostic channel up to three times, then send and receive the diagnostic request."""
         self.diagnostic_info = ""
         self._telemetry_client.disconnect()
 
